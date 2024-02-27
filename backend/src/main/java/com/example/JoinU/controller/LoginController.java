@@ -1,18 +1,19 @@
 package com.example.JoinU.controller;
 
 
+
 import com.example.JoinU.constants.SecurityConstants;
 import com.example.JoinU.doamin.AuthenticationRequest;
 import com.example.JoinU.prop.JwtProp;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,11 +50,34 @@ public class LoginController {
                 .header()
                 .add("typ", SecurityConstants.TOKEN_TYPE)
                 .and()
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 5) )
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 5))
                 .claim("uid", username)
                 .claim("rol", roles)
                 .compact();
 
         return new ResponseEntity<String>(jwt, HttpStatus.OK);
+    }
+
+    @GetMapping("/user/info")
+    public ResponseEntity<?> userInfo(@RequestHeader(name = "Authorization") String header) {
+        log.info("=====header=====");
+        log.info("Authorization : " + header);
+
+        // Authorization : Bearer ${jwt}
+        String jwt = header.replace(SecurityConstants.TOKEN_PREFIX, "").trim();
+        byte[] signingKey = jwtProp.getSecretKey().getBytes();
+
+        Jws<Claims> parsedToken = Jwts.parser().verifyWith(Keys.hmacShaKeyFor(signingKey))
+                .build()
+                .parseSignedClaims(jwt);
+
+        String username = parsedToken.getPayload().get("uid").toString();
+        log.info("username :" + username);
+
+        Claims claims = parsedToken.getPayload();
+        Object roles = claims.get("rol");
+        log.info("roles :" + roles);
+
+        return new ResponseEntity<String>(parsedToken.toString(), HttpStatus.OK);
     }
 }
