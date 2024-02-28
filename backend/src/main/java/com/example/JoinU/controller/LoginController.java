@@ -1,10 +1,9 @@
 package com.example.JoinU.controller;
 
 
-
-import com.example.JoinU.constants.SecurityConstants;
+import com.example.JoinU.common.constants.SecurityConstants;
 import com.example.JoinU.doamin.AuthenticationRequest;
-import com.example.JoinU.prop.JwtProp;
+import com.example.JoinU.common.prop.JwtProp;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -58,7 +57,7 @@ public class LoginController {
         return new ResponseEntity<String>(jwt, HttpStatus.OK);
     }
 
-    @GetMapping("/user/info")
+    //@GetMapping("/user/info")
     public ResponseEntity<?> userInfo(@RequestHeader(name = "Authorization") String header) {
         log.info("=====header=====");
         log.info("Authorization : " + header);

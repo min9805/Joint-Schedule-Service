@@ -1,4 +1,4 @@
-package com.example.JoinU.prop;
+package com.example.JoinU.common.prop;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

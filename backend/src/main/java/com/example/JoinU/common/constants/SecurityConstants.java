@@ -1,4 +1,4 @@
-package com.example.JoinU.constants;
+package com.example.JoinU.common.constants;
 
 /**
  * Security 및 JWT 관련 상수 관리
