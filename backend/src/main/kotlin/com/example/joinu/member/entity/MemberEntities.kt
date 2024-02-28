@@ -5,6 +5,7 @@ import com.example.joinu.common.status.ROLE
 import com.example.joinu.member.dto.MemberDtoResponse
 import com.example.joinu.member.dto.MemberPutDtoRequest
 import jakarta.persistence.*
+import org.springframework.security.crypto.password.PasswordEncoder
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -46,6 +47,10 @@ class Member(
     fun toDto() : MemberDtoResponse {
         val roles: List<ROLE> = memberRole?.map { it.role } ?: emptyList()
         return MemberDtoResponse(id!!, loginId, name, birthDate.formatDate(), gender.desc, email, roles)
+    }
+
+    fun encodePassword(passwordEncoder: PasswordEncoder) {
+        password = passwordEncoder.encode(password)
     }
 
     fun updateMember(memberPutDtoRequest: MemberPutDtoRequest) {

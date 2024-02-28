@@ -13,9 +13,11 @@ import com.example.joinu.member.entity.MemberRole
 import com.example.joinu.member.repository.MemberRepository
 import com.example.joinu.member.repository.MemberRoleRepository
 import jakarta.transaction.Transactional
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Transactional
@@ -25,6 +27,9 @@ class MemberService(
     private val memberRoleRepository: MemberRoleRepository,
     private val authenticationManagerBuilder: AuthenticationManagerBuilder,
     private val jwtTokenProvider: JwtTokenProvider,
+
+    @Autowired
+    private val passwordEncoder: PasswordEncoder
 ) {
     /**
      * 회원가입
@@ -37,6 +42,8 @@ class MemberService(
         }
 
         member = memberDtoRequest.toEntity()
+        member.encodePassword(passwordEncoder)
+
         memberRepository.save(member)
 
         val memberRole: MemberRole = MemberRole(null, ROLE.MEMBER, member)
