@@ -183,7 +183,6 @@ const LoginContextProvider = ({ children }) => {
     const loginSetting = (userData, accessToken) => {
 
         const { id, loginId, name, birthDate, gender, email, roles } = userData
-        const roleList = roles.map((auth) => auth.auth)
 
         console.log(`id : ${id}`);
         console.log(`loginId : ${loginId}`);
@@ -192,7 +191,6 @@ const LoginContextProvider = ({ children }) => {
         console.log(`gender : ${gender}`);
         console.log(`email : ${email}`);
         console.log(`roles : ${roles}`);
-        console.log(`roleList : ${roleList}`);
 
         // 🚀 axios 객체의 header(Authorization : `Bearer ${accessToken}`)
         api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
