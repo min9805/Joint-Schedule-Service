@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component
 import java.util.*
 import kotlin.RuntimeException
 
-const val EXPIRATION_MILLISECONDS: Long = 1000 * 60 * 60 * 5
+const val EXPIRATION_MILLISECONDS: Long = 1000 * 60 * 60 * 24 * 5
 
 @Component
 class JwtTokenProvider {
