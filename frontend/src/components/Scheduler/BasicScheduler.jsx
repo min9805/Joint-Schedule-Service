@@ -2,6 +2,7 @@ import { Scheduler } from "@aldabil/react-scheduler";
 
 export default function BasicScheduler({ events }) {
     return <Scheduler events={events}
+
         eventRenderer={({ event, ...props }) => {
 
             let backgroundColor = "#1976d2";

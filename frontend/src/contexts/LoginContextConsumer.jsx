@@ -5,7 +5,7 @@ import { EVENTS } from '../assets/defaultEvents.ts';
 import * as eventsApi from '../apis/events';
 
 const LoginContextConsumer = () => {
-  const { isLogin } = useContext(LoginContext)
+  const { isLogin, userInfo } = useContext(LoginContext)
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -15,7 +15,16 @@ const LoginContextConsumer = () => {
         if (isLogin) {
           const response = await eventsApi.getEvents()
           const { data, status, headers } = response;
-          setEvents(data.data);
+
+          const convertedData = data.data.map(event => ({
+            ...event,
+            start: new Date(event.start),
+            end: new Date(event.end)
+          }));
+
+          console.log("convertedData", convertedData);
+
+          setEvents(convertedData);
         }
       } catch (error) {
         console.error('Error fetching events:', error);
@@ -29,10 +38,8 @@ const LoginContextConsumer = () => {
     <div>
       {isLogin ?
         <div>
-          <h1>Hello!!!</h1>
+          <h1>{<span style={{ fontFamily: 'Arial', color: 'blue' }}>{userInfo.name}</span>}'s scheduler</h1>
           <hr />
-          <h3>Log in and try it</h3>
-          <br></br>
           <BasicScheduler events={events}></BasicScheduler>
         </div>
         :
@@ -42,6 +49,7 @@ const LoginContextConsumer = () => {
           <h3>Log in and try it</h3>
           <br></br>
           <BasicScheduler events={EVENTS}></BasicScheduler>
+          <p>{JSON.stringify(EVENTS)}</p>
         </div>
       }
     </div>
