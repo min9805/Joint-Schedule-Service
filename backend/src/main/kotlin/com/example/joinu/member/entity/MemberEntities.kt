@@ -2,6 +2,8 @@ package com.example.joinu.member.entity
 
 import com.example.joinu.common.status.Gender
 import com.example.joinu.common.status.ROLE
+import com.example.joinu.event.entity.Event
+import com.example.joinu.event.entity.MemberEvent
 import com.example.joinu.member.dto.MemberDtoResponse
 import com.example.joinu.member.dto.MemberPutDtoRequest
 import jakarta.persistence.*
@@ -44,7 +46,7 @@ class Member(
     private fun LocalDate.formatDate(): String =
         this.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
 
-    fun toDto() : MemberDtoResponse {
+    fun toDto(): MemberDtoResponse {
         val roles: List<ROLE> = memberRole?.map { it.role } ?: emptyList()
         return MemberDtoResponse(id!!, loginId, name, birthDate.formatDate(), gender.desc, email, roles)
     }
@@ -62,7 +64,7 @@ class Member(
             email = newEmail
         }
 
-        if (memberPutDtoRequest.password != null){
+        if (memberPutDtoRequest.password != null) {
             password = memberPutDtoRequest.password!!
         }
 
@@ -83,4 +85,4 @@ class MemberRole(
     @JoinColumn(foreignKey = ForeignKey(name = "fk_member_role_member_id"))
     val member: Member,
 
-)
+    )
