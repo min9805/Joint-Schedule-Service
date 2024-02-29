@@ -1,17 +1,16 @@
 import React from 'react'
 import Header from '../components/Header/Header'
 import LoginContextConsumer from '../contexts/LoginContextConsumer'
+import BasicScheduler from '../components/Scheduler/BasicScheduler'
+import { EVENTS } from '../assets/defaultEvents.ts';
 
 const Home = () => {
   return (
     <>
-        <Header />
-        <div className="container">
-            <h1>Home</h1>
-            <hr />
-            <h2>메인 페이지</h2>
-            <LoginContextConsumer />
-        </div>
+      <Header />
+      <div className="container">
+        <LoginContextConsumer />
+      </div>
     </>
   )
 }
