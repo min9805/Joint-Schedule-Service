@@ -6,7 +6,7 @@ export const login = (loginId, password) => {
         loginId: loginId,
         password: password
     };
-    
+
     return api.post('/api/member/login', data);
 };
 
