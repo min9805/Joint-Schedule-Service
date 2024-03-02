@@ -25,7 +25,7 @@ const LoginContextProvider = ({ children }) => {
         - 권한 정보
         - 아이디 저장
     */
-   /* -----------------------[State]-------------------------- */
+    /* -----------------------[State]-------------------------- */
     // 로그인 여부
     const [isLogin, setLogin] = useState(false);
 
@@ -33,7 +33,7 @@ const LoginContextProvider = ({ children }) => {
     const [userInfo, setUserInfo] = useState(null)
 
     // 권한 정보
-    const [roles, setRoles] = useState({isUser : false, isAmdin : false})
+    const [roles, setRoles] = useState({ isUser: false, isAmdin: false })
 
     // 아이디 저장
     const [remberUserId, setRemberUserId] = useState()
@@ -54,15 +54,15 @@ const LoginContextProvider = ({ children }) => {
         const accessToken = Cookies.get("accessToken")
         console.log(`accessToekn : ${accessToken}`);
 
-        
+
         // accessToken (jwt) 이 없음
-        if( !accessToken ) {
+        if (!accessToken) {
             console.log(`쿠키에 accessToken(jwt) 이 없음`);
             // 로그아웃 세팅
             logoutSetting()
             return
         }
-        
+
         // accessToken (jwt) 이 있음
         // ➡ 💌 header 에 💍 jwt 담기
         api.defaults.headers.common.Authorization = `Bearer ${accessToken}`
@@ -83,7 +83,7 @@ const LoginContextProvider = ({ children }) => {
         console.log(`data : ${data}`);
 
         // ❌ 인증 실패
-        if( data == 'UNAUTHRIZED' || response.status == 401 ) {
+        if (data == 'UNAUTHRIZED' || response.status == 401) {
             console.error(`accessToken (jwt) 이 만료되었거나 인증에 실패하였습니다.`);
             return
         }
@@ -106,7 +106,7 @@ const LoginContextProvider = ({ children }) => {
             const { data, status, headers } = response;
 
             const accessToken = data.data.accessToken;
-            
+
             // const data = response.data
             // const status = response.status
             // const headers = response.headers
@@ -119,16 +119,16 @@ const LoginContextProvider = ({ children }) => {
             console.log(`jwt : ${accessToken}`);
 
             // ✅ 로그인 성공
-            if( status === 200 ) {
+            if (status === 200) {
                 // 💍 ➡ 🍪 쿠키에 accessToken(jwt) 저장
                 Cookies.set("accessToken", accessToken)
 
                 // 로그인 체크 ( /users/{userId}   <---  userData )
                 loginCheck()
-                
+
                 // 여기
                 // alert(`로그인 성공`)
-                Swal.alert(`로그인 성공`, `메인 화면으로 갑니다.`, "success", () => { navigate("/")})
+                Swal.alert(`로그인 성공`, `메인 화면으로 갑니다.`, "success", () => { navigate("/") })
 
                 // 메인 페이지로 이동
                 navigate("/")
@@ -136,37 +136,37 @@ const LoginContextProvider = ({ children }) => {
         } catch (error) {
             // 로그인 실패
             // - 아이디 또는 비밀번호가 일치하지 않습니다.
-            Swal.alert("로그인 실패", "아이디 또는 비밀번호가 일치하지 않습니다.", "error" )
+            Swal.alert("로그인 실패", "아이디 또는 비밀번호가 일치하지 않습니다.", "error")
         }
-        
+
 
     }
 
     // 🔓 로그아웃
-    const logout = (force=false) => {
+    const logout = (force = false) => {
 
-        if( force ) {
+        if (force) {
             // 로그아웃 세팅
             logoutSetting()
-        
+
             // 페이지 이동 ➡ "/" (메인)
             navigate("/")
             return
-        }        
+        }
 
         // const check = window.confirm(`로그아웃하시겠습니까?`)
 
         Swal.confirm("로그아웃하시겠습니까?", "로그아웃을 진행합니다.", "warning",
-                (result) => {
-                    if( result.isConfirmed ) {
-                        // 로그아웃 세팅
-                        logoutSetting()
+            (result) => {
+                if (result.isConfirmed) {
+                    // 로그아웃 세팅
+                    logoutSetting()
 
-                        // 메인 페이지로 이동
-                        navigate("/")
-                    }
+                    // 메인 페이지로 이동
+                    navigate("/")
                 }
-            )
+            }
+        )
 
         // if( check ) {
         //     // 로그아웃 세팅
@@ -184,30 +184,30 @@ const LoginContextProvider = ({ children }) => {
 
         const { id, loginId, name, birthDate, gender, email, roles } = userData
 
-        console.log(`id : ${id}`);
-        console.log(`loginId : ${loginId}`);
-        console.log(`name : ${name}`);
-        console.log(`birthDate : ${birthDate}`);
-        console.log(`gender : ${gender}`);
-        console.log(`email : ${email}`);
-        console.log(`roles : ${roles}`);
+        // console.log(`id : ${id}`);
+        // console.log(`loginId : ${loginId}`);
+        // console.log(`name : ${name}`);
+        // console.log(`birthDate : ${birthDate}`);
+        // console.log(`gender : ${gender}`);
+        // console.log(`email : ${email}`);
+        // console.log(`roles : ${roles}`);
 
         // 🚀 axios 객체의 header(Authorization : `Bearer ${accessToken}`)
         api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 
         // 👩‍💼🔐 로그인 여부 : true
         setLogin(true)
-        
+
         // 👩‍💼✅ 유저정보 세팅
         const updatedUserInfo = { id, loginId, name, birthDate, gender, email }
         setUserInfo(updatedUserInfo)
 
         // 👮‍♀️✅ 권한정보 세팅
-        const updatedRoles = { isUser : false, isAmdin : false }
+        const updatedRoles = { isUser: false, isAmdin: false }
 
-        roles.forEach( (role) => {
-            if( role == 'MEMBER' ) updatedRoles.isUser = true
-            if( role == 'ADMIN' ) updatedRoles.isAdmin = true
+        roles.forEach((role) => {
+            if (role == 'MEMBER') updatedRoles.isUser = true
+            if (role == 'ADMIN') updatedRoles.isAdmin = true
         })
         setRoles(updatedRoles)
     }
@@ -230,19 +230,19 @@ const LoginContextProvider = ({ children }) => {
         setRoles(null)
     }
 
-    
 
-    useEffect( () => {
-      
+
+    useEffect(() => {
+
         // 로그인 체크
         loginCheck()
-      
+
     }, [])
 
 
 
-    return ( 
-        <LoginContext.Provider value={ {isLogin, userInfo, roles, login, loginCheck, logout} }>
+    return (
+        <LoginContext.Provider value={{ isLogin, userInfo, roles, login, loginCheck, logout }}>
             {children}
         </LoginContext.Provider>
     )

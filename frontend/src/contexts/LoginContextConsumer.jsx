@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { LoginContext } from './LoginContextProvider'
 import BasicScheduler from '../components/Scheduler/BasicScheduler'
+import DemoScheduler from '../components/Scheduler/DemoScheduler'
 import { EVENTS } from '../assets/defaultEvents.ts';
 import * as eventsApi from '../apis/events';
 
@@ -48,8 +49,7 @@ const LoginContextConsumer = () => {
           <hr />
           <h3>Log in and try it</h3>
           <br></br>
-          <BasicScheduler events={EVENTS}></BasicScheduler>
-          <p>{JSON.stringify(EVENTS)}</p>
+          <DemoScheduler events={EVENTS}></DemoScheduler>
         </div>
       }
     </div>
