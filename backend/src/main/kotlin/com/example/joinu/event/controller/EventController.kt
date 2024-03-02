@@ -30,32 +30,18 @@ class EventController(
     @PostMapping("/create")
     fun createEvent(
         @RequestBody eventDto: EventDto,
-    ): BaseResponse<Unit> {
+    ): BaseResponse<Event> {
         val userId = (SecurityContextHolder.getContext().authentication.principal as CustomUser).userId
-        val resultMsg = eventService.create(eventDto, userId)
-//        //Event 엔티티 생성
-//        val event = Event(
-//            title = eventDto.title,
-//            start = eventDto.start,
-//            end = eventDto.end,
-//            disabled = eventDto.disabled,
-//            color = eventDto.color,
-//            editable = eventDto.editable,
-//            deletable = eventDto.deletable,
-//            allDay = eventDto.allDay
-//        )
-//
-//        // 이벤트 저장
-//        val savedEvent = eventRepository.save(event)
-//        val member = eventDto.memberId?.let { memberRepository.findById(it).get() }
-//        val memberEvent = MemberEvent(
-//            member = member!!,
-//            event = savedEvent
-//        )
-//        memberEventRepository.save(memberEvent)
-//        val resultMsg = ""
-//        // 저장된 이벤트를 ResponseEntity에 담아 반환
-        return BaseResponse(message = resultMsg)
+        val result = eventService.create(eventDto, userId)
+        return BaseResponse(data = result)
+    }
+
+    @PostMapping("/update")
+    fun updateEvent(
+        @RequestBody eventDto: EventDto,
+    ): BaseResponse<Event> {
+        val updateEvents = eventService.updateEvents(eventDto)
+        return BaseResponse(data = updateEvents)
     }
 
     @GetMapping("/")

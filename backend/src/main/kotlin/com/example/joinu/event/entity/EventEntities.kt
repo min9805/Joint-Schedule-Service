@@ -13,17 +13,15 @@ import java.util.*
 class Event(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long? = null,
+    val id: Long? = null,
 
     @Column(nullable = false, length = 100)
-    val title: String,
+    var title: String,
 
     @Column
-//    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     var start: Date,
 
     @Column
-//    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     var end: Date,
 
     @Column
@@ -43,6 +41,35 @@ class Event(
 ) {
     fun toDto(): EventDtoResponse {
         return EventDtoResponse(id!!, title, start, end, disabled, color, editable, deletable, allDay)
+    }
+
+    fun updateEvent(eventDto: EventDto) {
+
+        eventDto.title.let { newTitle ->
+            title = newTitle
+        }
+        eventDto.start?.let { newStart ->
+            start = newStart
+        }
+        eventDto.end?.let { newEnd ->
+            end = newEnd
+        }
+        eventDto.color.let { newData ->
+            color = newData
+        }
+        eventDto.disabled.let { newData ->
+            disabled = newData
+        }
+        eventDto.editable.let { newData ->
+            editable = newData
+        }
+        eventDto.deletable.let { newData ->
+            deletable = newData
+        }
+        eventDto.allDay.let { newData ->
+            allDay = newData
+        }
+
     }
 }
 

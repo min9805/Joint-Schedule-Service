@@ -1,5 +1,6 @@
 package com.example.joinu.event.dto
 
+import com.example.joinu.common.status.Const
 import com.example.joinu.event.entity.Event
 import com.example.joinu.member.entity.Member
 import com.fasterxml.jackson.annotation.JsonFormat
@@ -23,6 +24,9 @@ import java.util.Date
 
 
 data class EventDto(
+    @JsonProperty("event_id")
+    var event_id: Long,
+
     @JsonProperty("title")
     var title: String,
 
@@ -35,140 +39,34 @@ data class EventDto(
     var end: Date,
 
     @JsonProperty("color")
-    var color: String,
+    var color: String?,
 
     @JsonProperty("disabled")
-    var disabled: Boolean,
+    var disabled: Boolean?,
 
     @JsonProperty("editable")
-    var editable: Boolean,
+    var editable: Boolean?,
 
     @JsonProperty("deletable")
-    var deletable: Boolean,
+    var deletable: Boolean?,
 
     @JsonProperty("allDay")
-    var allDay: Boolean,
+    var allDay: Boolean?,
 ) {
     fun toEntity(): Event =
         Event(
             title = title,
             start = start,
             end = end,
-            color = color,
-            disabled = disabled,
-            editable = editable,
-            deletable = deletable,
-            allDay = allDay
+            color = color ?: Const.DEFAULT_COLOR,
+            disabled = disabled ?: Const.DEFAULT_DISABLED,
+            editable = editable ?: Const.DEFAULT_EDITABLE,
+            deletable = deletable ?: Const.DEFAULT_DELETABLE,
+            allDay = allDay ?: Const.DEFAULT_ALL_DAY
         )
 
 }
 
-
-//data class EventDtoRequest(
-//    var id: Long?,
-//
-//    @field:NotBlank
-//    @JsonProperty("loginId")
-//    private val _loginId: String?,
-//
-//    @field:NotBlank
-//    @field:Pattern(
-//        regexp = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#\$%^&*])[a-zA-Z0-9!@#\$%^&*]{8,20}\$",
-//        message = "영문, 숫자, 특수문자를 포함한 8~20자리로 입력해주세요"
-//    )
-//    @JsonProperty("password")
-//    private val _password: String?,
-//
-//    @field:NotBlank
-//    @JsonProperty("name")
-//    private val _name: String?,
-//
-//    @field:NotBlank
-//    @field:Pattern(
-//        regexp = "^([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))$",
-//        message = "날짜형식(YYYY-MM-DD)을 확인해주세요"
-//    )
-//    @JsonProperty("birthDate")
-//    private val _birthDate: String?,
-//
-//    @field:NotBlank
-//    @field:ValidEnum(enumClass = Gender::class, message = "MAN 이나 WOMAN 중 하나를 선택해주세요.")
-//    @JsonProperty("gender")
-//    private val _gender: String?,
-//
-//    @field:NotBlank
-//    @field:Email
-//    @JsonProperty("email")
-//    private val _email: String?,
-//) {
-//    val loginId: String
-//        get() = _loginId!!
-//    val password: String
-//        get() = _password!!
-//    val name: String
-//        get() = _name!!
-//    val birthDate: LocalDate
-//        get() = _birthDate!!.toLocalDate()
-//    val gender: Gender
-//        get() = Gender.valueOf(_gender!!)
-//    val email: String
-//        get() = _email!!
-//
-//    private fun String.toLocalDate(): LocalDate =
-//        LocalDate.parse(this, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-//
-//    fun toEntity(): Member =
-//        Member(id, loginId, password, name, birthDate, gender, email)
-//
-//}
-//
-//
-//data class MemberPutDtoRequest(
-//    var id: Long?,
-//
-//    @field:NotBlank
-//    @JsonProperty("loginId")
-//    private val _loginId: String?,
-//
-//    @field:Pattern(
-//        regexp = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#\$%^&*])[a-zA-Z0-9!@#\$%^&*]{8,20}\$",
-//        message = "영문, 숫자, 특수문자를 포함한 8~20자리로 입력해주세요"
-//    )
-//    @JsonProperty("password")
-//    private val _password: String?,
-//
-//    @JsonProperty("name")
-//    private val _name: String?,
-//
-//    @field:Email
-//    @JsonProperty("email")
-//    private val _email: String?,
-//) {
-//    val loginId: String
-//        get() = _loginId!!
-//    val password: String?
-//        get() = _password
-//    val name: String?
-//        get() = _name
-//    val email: String?
-//        get() = _email
-//}
-//
-//data class LoginDto(
-//    @field:NotBlank
-//    @JsonProperty("loginId")
-//    private val _loginId: String?,
-//
-//    @field:NotBlank
-//    @JsonProperty("password")
-//    private val _password: String?,
-//) {
-//    val loginId: String
-//        get() = _loginId!!
-//    val password: String
-//        get() = _password!!
-//}
-//
 data class EventDtoResponse(
     val event_id: Long,
     val title: String,
