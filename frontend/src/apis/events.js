@@ -9,3 +9,6 @@ export const createEvent = (event) => api.post(`/api/event/create`, event)
 
 //이벤트 수정
 export const updateEvent = (event) => api.post(`/api/event/update`, event)
+
+//이벤트 삭제
+export const deleteEvent = (eventId) => api.post(`/api/event/delete`, eventId)
