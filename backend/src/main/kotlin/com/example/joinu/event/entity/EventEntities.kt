@@ -54,19 +54,19 @@ class Event(
         eventDto.end?.let { newEnd ->
             end = newEnd
         }
-        eventDto.color.let { newData ->
+        eventDto.color?.let { newData ->
             color = newData
         }
-        eventDto.disabled.let { newData ->
+        eventDto.disabled?.let { newData ->
             disabled = newData
         }
-        eventDto.editable.let { newData ->
+        eventDto.editable?.let { newData ->
             editable = newData
         }
-        eventDto.deletable.let { newData ->
+        eventDto.deletable?.let { newData ->
             deletable = newData
         }
-        eventDto.allDay.let { newData ->
+        eventDto.allDay?.let { newData ->
             allDay = newData
         }
 

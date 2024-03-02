@@ -52,14 +52,6 @@ class EventService(
         return result.map { it.toDto() }
     }
 
-    /**
-     * 내 정보 조회
-     */
-    fun searchMyInfo(id: Long): MemberDtoResponse {
-        val member: Member =
-            memberRepository.findByIdOrNull(id) ?: throw InvalidInputException("id", "회원번호(${id})가 존재하지 않는 유저입니다.")
-        return member.toDto()
-    }
 
     /**
      * 이벤트 수정
@@ -71,6 +63,30 @@ class EventService(
         event.updateEvent(eventDto)
         val updatedEvent = eventRepository.save(event)
         return updatedEvent
+    }
+
+    /**
+     * 이벤트 삭제
+     */
+    fun deleteEvents(deleteId: Long, memberId: Long): String {
+        val member: Member =
+            memberRepository.findByIdOrNull(memberId) ?: throw InvalidInputException(
+                "id",
+                "회원번호(${memberId})가 존재하지 않는 유저입니다."
+            )
+
+        val event: Event = eventRepository.findByIdOrNull(deleteId) ?: throw InvalidInputException(
+            "event_id 가 잘못되었습니다",
+        )
+
+        val findByMemberAndEvent =
+            memberEventRepository.findByMemberAndEvent(member, event) ?: throw InvalidInputException(
+                "memberId 혹은 eventId 가 잘못되었습니다."
+            )
+        findByMemberAndEvent.id?.let { memberEventRepository.deleteById(it) }
+        eventRepository.deleteById(deleteId)
+
+        return "${deleteId} 이벤트가 삭제되었습니다."
     }
 }
 

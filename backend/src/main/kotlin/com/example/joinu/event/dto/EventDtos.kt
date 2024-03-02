@@ -78,3 +78,7 @@ data class EventDtoResponse(
     val deletable: Boolean?,
     val allDay: Boolean?,
 )
+
+data class DeleteEventDto(
+    val deletedId: Long
+)

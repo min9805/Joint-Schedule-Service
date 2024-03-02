@@ -2,6 +2,7 @@ package com.example.joinu.event.controller
 
 import com.example.joinu.common.dto.BaseResponse
 import com.example.joinu.common.dto.CustomUser
+import com.example.joinu.event.dto.DeleteEventDto
 import com.example.joinu.event.dto.EventDto
 import com.example.joinu.event.dto.EventDtoResponse
 import com.example.joinu.event.entity.Event
@@ -42,6 +43,15 @@ class EventController(
     ): BaseResponse<Event> {
         val updateEvents = eventService.updateEvents(eventDto)
         return BaseResponse(data = updateEvents)
+    }
+
+    @PostMapping("/delete")
+    fun deleteEvent(
+        @RequestBody deleteId: DeleteEventDto,
+    ): BaseResponse<Unit> {
+        val userId = (SecurityContextHolder.getContext().authentication.principal as CustomUser).userId
+        val resultMsg = eventService.deleteEvents(deleteId.deletedId, userId)
+        return BaseResponse(message = resultMsg)
     }
 
     @GetMapping("/")
