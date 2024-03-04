@@ -25,7 +25,7 @@ import java.util.Date
 
 data class EventDto(
     @JsonProperty("event_id")
-    var event_id: Long,
+    var event_id: Long?,
 
     @JsonProperty("title")
     var title: String,

@@ -2,6 +2,7 @@ package com.example.joinu.event.service
 
 import com.example.joinu.common.status.Gender
 import com.example.joinu.event.dto.EventDto
+import com.example.joinu.event.entity.Event
 import com.example.joinu.event.entity.MemberEvent
 import com.example.joinu.event.repository.EventRepository
 import com.example.joinu.event.repository.MemberEventRepository
@@ -36,23 +37,22 @@ class EventServiceTest {
     @Mock
     private lateinit var memberRepository: MemberRepository
 
-    @Mock
+    @InjectMocks
     private lateinit var eventService: EventService
 
     @Test
     fun `test create event`() {
-        // Mock data
-        val memberId = 1L
+        //given
         val member = Member(
-            id = memberId,
-            loginId = "testuser",
-            password = "password123",
+            loginId = "test_user",
+            password = "password123!",
             name = "Test User",
             birthDate = LocalDate.now(),
             gender = Gender.MAN,
             email = "test@example.com"
         )
         val eventDto = EventDto(
+            event_id = null,
             title = "Test Event",
             start = Date(),
             end = Date(),
@@ -63,17 +63,15 @@ class EventServiceTest {
             allDay = false
         )
 
-        val Event = eventDto.toEntity()
 
-        // Mock repository behavior
-        memberRepository.save(member)
-        val save = eventRepository.save(Event)
-        memberEventRepository.save(MemberEvent(member = member, event = Event))
+        //when
+        val savedMember = memberRepository.save(member)
+        val savedMemberId = savedMember.id
+        eventService.create(eventDto, savedMemberId!!)
+        val eventList = memberRepository.findEventsByMemberId(savedMemberId)
 
-        // Call service method
-
-        println("save = ${save}")
-
-        // Assert result
+        //then
+        assertTrue(eventList.isNotEmpty())
+        assertTrue(eventList.any { it.title == eventDto.title })
     }
 }

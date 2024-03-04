@@ -22,8 +22,6 @@ class EventService(
     private val eventRepository: EventRepository,
     private val memberEventRepository: MemberEventRepository,
     private val memberRepository: MemberRepository,
-    private val authenticationManagerBuilder: AuthenticationManagerBuilder,
-    private val jwtTokenProvider: JwtTokenProvider,
 
     ) {
     /**
