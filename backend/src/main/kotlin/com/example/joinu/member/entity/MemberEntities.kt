@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter
 )
 class Member(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
     @Column(nullable = false, length = 30, updatable = false)
@@ -74,7 +74,7 @@ class Member(
 @Entity
 class MemberRole(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
     @Column(nullable = false, length = 30)

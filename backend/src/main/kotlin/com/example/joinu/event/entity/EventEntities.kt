@@ -2,17 +2,15 @@ package com.example.joinu.event.entity
 
 import com.example.joinu.event.dto.EventDto
 import com.example.joinu.event.dto.EventDtoResponse
+import com.example.joinu.team.entity.Team
 import com.example.joinu.member.entity.Member
-import com.example.joinu.member.entity.MemberRole
-import com.fasterxml.jackson.annotation.JsonFormat
 import jakarta.persistence.*
-import java.time.LocalDateTime
 import java.util.*
 
 @Entity
 class Event(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
     @Column(nullable = false, length = 100)
@@ -76,7 +74,7 @@ class Event(
 @Entity
 class MemberEvent(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -86,6 +84,19 @@ class MemberEvent(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
     val event: Event,
+) {
+
+}
+
+
+@Entity
+class TeamEvent(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    val team: Team
 ) {
 
 }

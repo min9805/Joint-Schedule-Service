@@ -1,7 +1,8 @@
-package com.example.joinu.group.entity
+package com.example.joinu.team.entity
 
 import com.example.joinu.event.entity.TeamEvent
 import com.example.joinu.member.entity.Member
+import com.example.joinu.team.dto.GetTeamsDtoResponse
 import jakarta.persistence.*
 
 @Entity
@@ -16,12 +17,13 @@ class Team(
 
     ) {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
-    val teamEvent: List<TeamEvent>? = null
+    val teamEvent: List<TeamEvent>? = ArrayList()
 
+    fun toDto(): GetTeamsDtoResponse = GetTeamsDtoResponse(teamId = id!!, name = name)
 }
 
 @Entity
-class MemberGroup(
+class MemberTeam(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
