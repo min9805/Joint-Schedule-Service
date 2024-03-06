@@ -6,8 +6,12 @@ import com.example.joinu.member.entity.Member
 import org.springframework.data.jpa.repository.JpaRepository
 
 
-interface EventRepository : JpaRepository<Event, Long>
+interface EventRepository : JpaRepository<Event, Long> {
+}
+
 
 interface MemberEventRepository : JpaRepository<MemberEvent, Long> {
     fun findByMemberAndEvent(member: Member?, event: Event?): MemberEvent?
+
+    fun findByMemberId(memberId: Long): List<MemberEvent>
 }

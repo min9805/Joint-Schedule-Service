@@ -46,11 +46,10 @@ var memberService: MemberService = MemberService(
     passwordEncoder
 )
 
-lateinit var memberDtoRequest: MemberDtoRequest
 
 class MemberServiceTest : BehaviorSpec({
 
-    Given("정상적인 유저의 상황에서") {
+    Given("회원가입 테스트") {
         val memberSignupDto = MemberDtoRequest(
             id = null,
             _loginId = "테스트_로그인_아이디",
@@ -81,11 +80,6 @@ class MemberServiceTest : BehaviorSpec({
             Then("정상적으로 회원 가입이 진행되어야한다.") {
 
                 result should be("회원가입이 완료되었습니다.")
-                //                val savedMember = memberRepository.findByLoginId("테스트_로그인_아이디")
-//                assertNotNull(savedMember)
-//                assertEquals("테스트_로그인_아이디", savedMember!!.loginId)
-//                assertEquals("테스트_이름", savedMember.name)
-//                assertEquals("test@example.com", savedMember.email)
             }
         }
     }

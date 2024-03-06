@@ -46,6 +46,9 @@ class EventService(
      * 이벤트 조회
      */
     fun getEvents(id: Long): List<EventDtoResponse>? {
+//        val result = memberRepository.findEventsByMemberId(id)
+        val memberEvent = memberEventRepository.findByMemberId(id)
+
         val result = memberRepository.findEventsByMemberId(id)
         return result.map { it.toDto() }
     }
