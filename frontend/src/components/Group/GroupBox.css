@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.group-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 960px; /* 그룹 박스들의 최대 너비를 지정합니다. */
+}
+
+.group-box {
+    width: calc(33.333% - 40px); /* 한 줄에 최대 3개의 그룹이 표시되도록 계산합니다. */
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    height: 180px;
+}
+
+.create-group {
+    width: calc(33.333% - 40px); /* 한 줄에 최대 3개의 그룹이 표시되도록 계산합니다. */
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    height: 180px;
+}
+
+.plus-icon {
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+.create-group-text {
+    font-size: 20px;
+    font-weight: bold;
+}

@@ -1,6 +1,6 @@
 import { Scheduler } from "@aldabil/react-scheduler";
 
-export default function BasicScheduler({ events }) {
+export default function DemoScheduler({ events }) {
     return <Scheduler events={events}
 
         eventRenderer={({ event, ...props }) => {

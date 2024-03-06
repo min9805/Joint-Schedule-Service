@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Join from './pages/Join';
 import User from './pages/User';
 import About from './pages/About';
+import Group from './pages/Group';
 import LoginContextProvider from './contexts/LoginContextProvider';
 import Admin from './pages/Admin';
 
@@ -18,7 +19,8 @@ export default function App() {
           <Route path="/join" element={ <Join /> }></Route>
           <Route path="/user" element={ <User /> }></Route>
           <Route path="/about" element={ <About /> }></Route>
-          <Route path="/admin" element={ <Admin /> }></Route>
+          <Route path="/admin" element={<Admin />}></Route>
+          <Route path="/group" element={<Group />}></Route>
         </Routes>
       </LoginContextProvider>
     </BrowserRouter>
