@@ -1,15 +1,13 @@
 package com.example.joinu.team.service
 
 import com.example.joinu.common.exception.InvalidInputException
-import com.example.joinu.event.dto.EventDto
-import com.example.joinu.event.entity.Event
-import com.example.joinu.event.entity.MemberEvent
 import com.example.joinu.member.entity.Member
 import com.example.joinu.member.repository.MemberRepository
 import com.example.joinu.team.dto.CreateTeamDtoRequest
+import com.example.joinu.team.dto.CreateTeamDtoResponse
+import com.example.joinu.team.dto.GetMemberTeamDtoResponse
 import com.example.joinu.team.dto.GetTeamsDtoResponse
 import com.example.joinu.team.entity.MemberTeam
-import com.example.joinu.team.entity.Team
 import com.example.joinu.team.repository.MemberTeamRepository
 import com.example.joinu.team.repository.TeamRepository
 import org.springframework.data.repository.findByIdOrNull
@@ -26,15 +24,15 @@ class TeamService(
     /**
      * 팀 조회
      */
-    fun findTeamsByMemberId(memberId: Long): List<GetTeamsDtoResponse> {
+    fun findTeamsByMemberId(memberId: Long): List<GetMemberTeamDtoResponse> {
         val memberTeams = memberTeamRepository.findByMemberId(memberId)
-        return memberTeams.map { it.team.toDto() }
+        return memberTeams.map { it.toGetMemberTeamDtoResponse() }
     }
 
     /**
      * 팀 생성
      */
-    fun create(createTeamDtoRequest: CreateTeamDtoRequest, id: Long): String {
+    fun create(createTeamDtoRequest: CreateTeamDtoRequest, id: Long): CreateTeamDtoResponse {
 
         //Id 검사
         val member: Member =
@@ -43,10 +41,11 @@ class TeamService(
         val team = createTeamDtoRequest.toEntity()
         val newTeam = teamRepository.save(team)
 
-        val memberTeam = MemberTeam(member = member, team = newTeam)
+        val memberTeam =
+            MemberTeam(member = member, team = newTeam, groupName = createTeamDtoRequest.name, memberName = member.name)
         memberTeamRepository.save(memberTeam)
 
-        return "Team 생성이 완료되었습니다.";
+        return newTeam.toCreateTeamDtoResponse();
     }
 
 }

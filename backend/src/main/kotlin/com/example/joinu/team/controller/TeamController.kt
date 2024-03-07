@@ -3,6 +3,8 @@ package com.example.joinu.team.controller
 import com.example.joinu.common.dto.BaseResponse
 import com.example.joinu.common.dto.CustomUser
 import com.example.joinu.team.dto.CreateTeamDtoRequest
+import com.example.joinu.team.dto.CreateTeamDtoResponse
+import com.example.joinu.team.dto.GetMemberTeamDtoResponse
 import com.example.joinu.team.dto.GetTeamsDtoResponse
 import com.example.joinu.team.entity.Team
 import com.example.joinu.team.service.TeamService
@@ -21,16 +23,16 @@ class TeamController(
 ) {
 
     @GetMapping("/")
-    fun getTeamsByMemberId(): BaseResponse<List<GetTeamsDtoResponse>> {
+    fun getTeamsByMemberId(): BaseResponse<List<GetMemberTeamDtoResponse>> {
         val userId = (SecurityContextHolder.getContext().authentication.principal as CustomUser).userId
         val result = teamService.findTeamsByMemberId(userId)
         return BaseResponse(data = result)
     }
 
     @PostMapping("/create")
-    fun createTeam(@RequestBody createTeamDtoRequest: CreateTeamDtoRequest): BaseResponse<Unit> {
+    fun createTeam(@RequestBody createTeamDtoRequest: CreateTeamDtoRequest): BaseResponse<CreateTeamDtoResponse> {
         val userId = (SecurityContextHolder.getContext().authentication.principal as CustomUser).userId
-        val resultMsg = teamService.create(createTeamDtoRequest, userId)
-        return BaseResponse(message = resultMsg)
+        val result = teamService.create(createTeamDtoRequest, userId)
+        return BaseResponse(data = result)
     }
 }
