@@ -2,7 +2,6 @@ package com.example.joinu.event.entity
 
 import com.example.joinu.event.dto.EventDto
 import com.example.joinu.event.dto.EventDtoResponse
-import com.example.joinu.team.entity.Team
 import com.example.joinu.member.entity.Member
 import jakarta.persistence.*
 import java.util.*
@@ -89,14 +88,3 @@ class MemberEvent(
 }
 
 
-@Entity
-class TeamEvent(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    val team: Team
-) {
-
-}

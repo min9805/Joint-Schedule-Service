@@ -3,12 +3,12 @@ package com.example.joinu.team.service
 import com.example.joinu.common.exception.InvalidInputException
 import com.example.joinu.member.entity.Member
 import com.example.joinu.member.repository.MemberRepository
-import com.example.joinu.team.dto.CreateTeamDtoRequest
-import com.example.joinu.team.dto.CreateTeamDtoResponse
-import com.example.joinu.team.dto.GetMemberTeamDtoResponse
-import com.example.joinu.team.dto.GetTeamsDtoResponse
+import com.example.joinu.team.dto.*
 import com.example.joinu.team.entity.MemberTeam
+import com.example.joinu.team.entity.Team
+import com.example.joinu.team.entity.TeamEvent
 import com.example.joinu.team.repository.MemberTeamRepository
+import com.example.joinu.team.repository.TeamEventRepository
 import com.example.joinu.team.repository.TeamRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -20,6 +20,7 @@ class TeamService(
     private val memberTeamRepository: MemberTeamRepository,
     private val memberRepository: MemberRepository,
     private val teamRepository: TeamRepository,
+    private val teamEventRepository: TeamEventRepository,
 ) {
     /**
      * 팀 조회
@@ -48,4 +49,43 @@ class TeamService(
         return newTeam.toCreateTeamDtoResponse();
     }
 
+    /**
+     * 팀에 속한 그룹원 조회
+     */
+    fun getMembers(teamId: Long): List<GetTeamMembersDtoResponse> {
+        val memberTeams = memberTeamRepository.findByTeamId(teamId)
+        return memberTeams.map { it.toGetTeamMembersDtoResponse() }
+    }
+
+    /**
+     * 팀이 가진 이벤트 조회
+     */
+    fun getTeamEvents(teamId: Long): List<GetTeamEventsDtoResponse>? {
+        val team: Team =
+            teamRepository.findByIdOrNull(teamId) ?: throw InvalidInputException("팀 ID 가 존재하지 않습니다.")
+
+        return team.teamEvent?.map { it.toGetTeamEventsDtoResponse() }
+    }
+
+    /**
+     * 팀에 이벤트 생성
+     */
+    fun createTeamEvents(memberId: Long, teamId: Long, createTeamEventsDtoRequest: CreateTeamEventsDtoRequest): String {
+        val member: Member =
+            memberRepository.findByIdOrNull(memberId) ?: throw InvalidInputException(
+                "id",
+                "회원번호(${memberId})가 존재하지 않는 유저입니다."
+            )
+
+        val team: Team =
+            teamRepository.findByIdOrNull(teamId) ?: throw InvalidInputException("팀 ID 가 존재하지 않습니다.")
+
+
+        val teamEvent = createTeamEventsDtoRequest.toEntity()
+        teamEvent.member = member
+        teamEvent.team = team
+        teamEventRepository.save(teamEvent)
+
+        return "팀에 이벤트가 생성되었습니다.";
+    }
 }

@@ -11,14 +11,11 @@ import com.example.joinu.event.repository.EventRepository
 import com.example.joinu.event.repository.MemberEventRepository
 import com.example.joinu.event.service.EventService
 import com.example.joinu.member.repository.MemberRepository
+import com.example.joinu.team.dto.GetMemberTeamDtoResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 // 이벤트 생성 컨트롤러
 @RestController
@@ -60,4 +57,5 @@ class EventController(
         val data = eventService.getEvents(userId)
         return BaseResponse(data = data)
     }
+
 }

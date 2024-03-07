@@ -1,12 +1,11 @@
 package com.example.joinu.team.entity
 
 import com.example.joinu.common.status.Const
-import com.example.joinu.event.entity.TeamEvent
 import com.example.joinu.member.entity.Member
-import com.example.joinu.team.dto.CreateTeamDtoResponse
-import com.example.joinu.team.dto.GetMemberTeamDtoResponse
-import com.example.joinu.team.dto.GetTeamsDtoResponse
+import com.example.joinu.team.dto.*
 import jakarta.persistence.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 @Entity
 @Table
@@ -53,4 +52,51 @@ class MemberTeam(
         color = color,
     )
 
+    fun toGetTeamMembersDtoResponse(): GetTeamMembersDtoResponse = GetTeamMembersDtoResponse(
+        admin_id = team.id!!,
+        title = memberName,
+        mobile = subName,
+        avator = avator,
+        color = color,
+    )
+}
+
+@Entity
+class TeamEvent(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null,
+
+    @Column(nullable = false, length = 100)
+    var title: String,
+
+    @Column
+    var start: Date,
+
+    @Column
+    var end: Date,
+
+    @ManyToOne
+    var member: Member? = null,
+
+    @ManyToOne
+    var team: Team? = null,
+) {
+    fun toCreateTeamEventsDtoRequest(): CreateTeamEventsDtoResponse =
+        CreateTeamEventsDtoResponse(
+            event_id = id!!,
+            title = title,
+            start = start,
+            end = end,
+            admin_id = member!!.id!!
+        )
+
+    fun toGetTeamEventsDtoResponse(): GetTeamEventsDtoResponse =
+        GetTeamEventsDtoResponse(
+            event_id = id!!,
+            title = title,
+            start = start,
+            end = end,
+            admin_id = member!!.id!!
+        )
 }
