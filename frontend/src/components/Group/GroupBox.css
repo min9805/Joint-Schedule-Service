@@ -18,6 +18,8 @@
     text-align: center;
     cursor: pointer;
     height: 180px;
+    width: 250px;
+
 }
 
 .create-group {
@@ -29,6 +31,7 @@
     flex-direction: column;
     cursor: pointer;
     height: 180px;
+    width: 250px;
 }
 
 .plus-icon {
@@ -39,4 +42,37 @@
 .create-group-text {
     font-size: 20px;
     font-weight: bold;
+}
+
+
+.group-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.group-popup input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.group-popup button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.group-popup button:hover {
+    background-color: #0056b3;
 }
