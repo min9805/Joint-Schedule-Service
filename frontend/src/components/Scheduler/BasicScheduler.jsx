@@ -5,6 +5,7 @@ export default function BasicScheduler({ events }) {
 
     const handleConfirm = async (event, action) => {
         try {
+            console.log("handleConfirm");
             let response;
             if (action === "create") {
                 // createEvent() 함수를 사용하여 이벤트를 생성합니다.
@@ -14,15 +15,12 @@ export default function BasicScheduler({ events }) {
                 response = await eventsApi.updateEvent(event);
             }
 
-            console.log(event);
+            console.log("evnet: ", event);
 
             // 응답에서 data, status, headers 등의 정보를 추출합니다.
             const { data, status, headers } = response;
 
             // 여기서 필요한 작업을 수행합니다.
-            console.log("Event Data:", data);
-            console.log("Status:", status);
-            console.log("Headers:", headers);
             event.event_id = data.data.id
 
             // 작업이 완료되면 Promise를 성공적으로 해결합니다.
@@ -41,18 +39,13 @@ export default function BasicScheduler({ events }) {
 
     const handleDelete = async (deletedId) => {
         try {
+            console.log("handleDelete")
             let response;
             response = await eventsApi.deleteEvent({ "deletedId": deletedId });
             console.log(deletedId);
 
             // // 응답에서 data, status, headers 등의 정보를 추출합니다.
             const { data, status, headers } = response;
-
-            // // 여기서 필요한 작업을 수행합니다.
-            console.log("Event Data:", data);
-            console.log("Status:", status);
-            console.log("Headers:", headers);
-            // event.event_id = data.data.id
 
             // // 작업이 완료되면 Promise를 성공적으로 해결합니다.
             return new Promise((res, rej) => {
@@ -68,13 +61,36 @@ export default function BasicScheduler({ events }) {
         }
     }
 
+    const handleDrop = async (droppedOn, updatedEvent, originalEvent) => {
+        try {
+            console.log("handleDelete")
+            let response;
+            response = await eventsApi.updateEvent(updatedEvent);
 
+            // // 응답에서 data, status, headers 등의 정보를 추출합니다.
+            const { data, status, headers } = response;
+
+
+            // // 작업이 완료되면 Promise를 성공적으로 해결합니다.
+            return new Promise((res, rej) => {
+                res({
+                    ...updatedEvent,
+                });
+            });
+        } catch (error) {
+            // 에러가 발생한 경우 처리합니다.
+            console.error("Error:", error);
+            // 에러를 throw하여 호출자에게 전달합니다.
+            throw error;
+        }
+    }
 
     return <Scheduler events={events}
         view="week"
 
         onConfirm={handleConfirm}
         onDelete={handleDelete}
+        onEventDrop={handleDrop}
 
         // onDelete={console.log("onDelete")}
         day={{
