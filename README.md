@@ -32,7 +32,7 @@ This project comprises both a backend developed using Spring Boot and a frontend
 <img src="https://github.com/min9805/min9805.github.io/assets/56664567/a3985454-4424-4f69-8c1d-407323175fb2" width="70%" height="70%">
 
 - Event creation, modification, and deletion
-<img src="https://github.com/min9805/min9805.github.io/assets/56664567/b843eff0-f6a3-4b76-99dc-a436e1fc5ed9" width="30%" height="30%">
+<img src="https://github.com/min9805/min9805.github.io/assets/56664567/b843eff0-f6a3-4b76-99dc-a436e1fc5ed9" width="50%" height="50%">
 
 - Group Scheduler Service
  
