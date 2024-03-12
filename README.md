@@ -29,19 +29,17 @@ This project comprises both a backend developed using Spring Boot and a frontend
 ![image](https://github.com/min9805/min9805.github.io/assets/56664567/225d6013-d36d-41ed-9b42-24387fdd6d29)
 
 - User authentication and authorization
-
-![image](https://github.com/min9805/min9805.github.io/assets/56664567/a3985454-4424-4f69-8c1d-407323175fb2)
+<img src="https://github.com/min9805/min9805.github.io/assets/56664567/a3985454-4424-4f69-8c1d-407323175fb2" width="70%" height="70%">
 
 - Event creation, modification, and deletion
-
-![image](https://github.com/min9805/min9805.github.io/assets/56664567/b843eff0-f6a3-4b76-99dc-a436e1fc5ed9)
+<img src="https://github.com/min9805/min9805.github.io/assets/56664567/b843eff0-f6a3-4b76-99dc-a436e1fc5ed9" width="30%" height="30%">
 
 - Group Scheduler Service
  
-![image](https://github.com/min9805/min9805.github.io/assets/56664567/a269d7f2-525b-456c-b3fa-a6e772c9ba7a)
-<img src="https://github.com/min9805/min9805.github.io/assets/56664567/0dcfb792-f257-45c2-ab8c-3489bb87b920" width="50%" height="50%">
-<img src="https://github.com/min9805/min9805.github.io/assets/56664567/431b43a3-9bbc-4f95-91f1-520837975ae8" width="50%" height="50%">
-<img src="https://github.com/min9805/min9805.github.io/assets/56664567/011bb999-4a89-4dc3-9263-665b8b6ebc96" width="50%" height="50%">
+<img src="https://github.com/min9805/min9805.github.io/assets/56664567/a269d7f2-525b-456c-b3fa-a6e772c9ba7a" width="70%" height="70%">
+<img src="https://github.com/min9805/min9805.github.io/assets/56664567/0dcfb792-f257-45c2-ab8c-3489bb87b920" width="30%" height="30%">
+<img src="https://github.com/min9805/min9805.github.io/assets/56664567/431b43a3-9bbc-4f95-91f1-520837975ae8" width="30%" height="30%">
+<img src="https://github.com/min9805/min9805.github.io/assets/56664567/011bb999-4a89-4dc3-9263-665b8b6ebc96" width="30%" height="30%">
 
 
 
