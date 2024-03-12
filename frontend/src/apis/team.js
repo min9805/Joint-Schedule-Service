@@ -13,9 +13,12 @@ export const getTeamMembers = (teamId) => api.get(`/api/team/members/${teamId}`)
 //팀 이벤트 조회
 export const getTeamEvents = (teamId) => api.get(`/api/team/events/${teamId}`);
 
+//팀에 멤버 추가
+export const addTeamMember = (data) => api.post(`/api/team/addMember`, data);
 
 //이벤트 수정
 export const updateEvent = (event) => api.post(`/api/event/update`, event)
 
 //이벤트 삭제
 export const deleteEvent = (eventId) => api.post(`/api/event/delete`, eventId)
+
