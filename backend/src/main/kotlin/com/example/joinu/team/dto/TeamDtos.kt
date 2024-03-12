@@ -67,3 +67,10 @@ data class CreateTeamEventsDtoRequest(
         end = end,
     )
 }
+
+data class AddMemberDtoRequest(
+    val id: Long,
+    val groupId: Long
+) {
+
+}

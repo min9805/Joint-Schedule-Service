@@ -3,10 +3,7 @@ package com.example.joinu.member.controller
 import com.example.joinu.common.authority.TokenInfo
 import com.example.joinu.common.dto.BaseResponse
 import com.example.joinu.common.dto.CustomUser
-import com.example.joinu.member.dto.LoginDto
-import com.example.joinu.member.dto.MemberDtoRequest
-import com.example.joinu.member.dto.MemberDtoResponse
-import com.example.joinu.member.dto.MemberPutDtoRequest
+import com.example.joinu.member.dto.*
 import com.example.joinu.member.service.MemberService
 import jakarta.validation.Valid
 import org.springframework.security.core.context.SecurityContextHolder
@@ -47,6 +44,15 @@ class MemberController(
     fun searchMyInfo(): BaseResponse<MemberDtoResponse> {
         val userId = (SecurityContextHolder.getContext().authentication.principal as CustomUser).userId
         val response = memberService.searchMyInfo(userId)
+        return BaseResponse(data = response)
+    }
+
+    /**
+     * 다른 사람 정보 보기
+     */
+    @PostMapping("/info")
+    fun searchMemberInfo(@RequestBody memberInfo: MemberInfoDtoRequest): BaseResponse<MemberInfoDtoResponse> {
+        val response = memberService.searchMemberInfo(memberInfo.loginId)
         return BaseResponse(data = response)
     }
 

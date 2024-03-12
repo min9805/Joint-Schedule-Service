@@ -5,6 +5,7 @@ import com.example.joinu.common.status.ROLE
 import com.example.joinu.event.entity.Event
 import com.example.joinu.event.entity.MemberEvent
 import com.example.joinu.member.dto.MemberDtoResponse
+import com.example.joinu.member.dto.MemberInfoDtoResponse
 import com.example.joinu.member.dto.MemberPutDtoRequest
 import jakarta.persistence.*
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -39,6 +40,8 @@ class Member(
 
     @Column(nullable = false, length = 30)
     var email: String,
+
+    var avator: String = "/img/default_avator.png",
 ) {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     val memberRole: List<MemberRole>? = null
@@ -49,6 +52,10 @@ class Member(
     fun toDto(): MemberDtoResponse {
         val roles: List<ROLE> = memberRole?.map { it.role } ?: emptyList()
         return MemberDtoResponse(id!!, loginId, name, birthDate.formatDate(), gender.desc, email, roles)
+    }
+
+    fun toMemberInfoDto(): MemberInfoDtoResponse {
+        return MemberInfoDtoResponse(id!!, loginId, avator)
     }
 
     fun encodePassword(passwordEncoder: PasswordEncoder) {
@@ -69,6 +76,8 @@ class Member(
         }
 
     }
+
+
 }
 
 @Entity

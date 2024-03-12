@@ -73,4 +73,15 @@ class TeamController(
         val result = teamService.createTeamEvents(userId, teamId, createTeamEventsDtoRequest)
         return BaseResponse(message = result)
     }
+
+    /**
+     * 팀에 멤버 추가
+     */
+    @PostMapping("/addMember")
+    fun addMember(
+        @RequestBody addMemberDtoRequest: AddMemberDtoRequest,
+    ): BaseResponse<Unit> {
+        val result = teamService.addMember(addMemberDtoRequest)
+        return BaseResponse(message = result)
+    }
 }

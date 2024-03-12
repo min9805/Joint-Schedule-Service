@@ -4,10 +4,7 @@ import com.example.joinu.common.authority.JwtTokenProvider
 import com.example.joinu.common.authority.TokenInfo
 import com.example.joinu.common.exception.InvalidInputException
 import com.example.joinu.common.status.ROLE
-import com.example.joinu.member.dto.LoginDto
-import com.example.joinu.member.dto.MemberDtoRequest
-import com.example.joinu.member.dto.MemberDtoResponse
-import com.example.joinu.member.dto.MemberPutDtoRequest
+import com.example.joinu.member.dto.*
 import com.example.joinu.member.entity.Member
 import com.example.joinu.member.entity.MemberRole
 import com.example.joinu.member.repository.MemberRepository
@@ -66,15 +63,31 @@ class MemberService(
      * 내 정보 조회
      */
     fun searchMyInfo(id: Long): MemberDtoResponse {
-        val member: Member = memberRepository.findByIdOrNull(id) ?: throw InvalidInputException("id", "회원번호(${id})가 존재하지 않는 유저입니다.")
+        val member: Member =
+            memberRepository.findByIdOrNull(id) ?: throw InvalidInputException("id", "회원번호(${id})가 존재하지 않는 유저입니다.")
         return member.toDto()
+    }
+
+    /**
+     * 멤버 조회
+     */
+    fun searchMemberInfo(loginId: String): MemberInfoDtoResponse {
+        val member: Member =
+            memberRepository.findByLoginId(loginId) ?: throw InvalidInputException(
+                "id",
+                "회원 아이디 (${loginId})가 존재하지 않는 유저입니다."
+            )
+        return member.toMemberInfoDto()
     }
 
     /**
      * 내 정보 수정
      */
     fun saveMyInfo(memberDtoRequest: MemberPutDtoRequest): String {
-        val member: Member = memberRepository.findByIdOrNull(memberDtoRequest.id) ?: throw InvalidInputException("id", "회원번호(${memberDtoRequest.id})가 존재하지 않는 유저입니다.")
+        val member: Member = memberRepository.findByIdOrNull(memberDtoRequest.id) ?: throw InvalidInputException(
+            "id",
+            "회원번호(${memberDtoRequest.id})가 존재하지 않는 유저입니다."
+        )
         member.updateMember(memberDtoRequest)
         memberRepository.save(member)
         return "수정이 완료되었습니다."

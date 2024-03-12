@@ -33,8 +33,8 @@ class MemberTeam(
 
     var groupName: String,
     var memberName: String,
-    var subName: String = "",
-    var avator: String = "",
+    var subName: String = "subName",
+    var avator: String = "/img/default_avator.png",
     var color: String = Const.DEFAULT_COLOR,
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -53,7 +53,7 @@ class MemberTeam(
     )
 
     fun toGetTeamMembersDtoResponse(): GetTeamMembersDtoResponse = GetTeamMembersDtoResponse(
-        admin_id = team.id!!,
+        admin_id = member.id!!,
         title = memberName,
         mobile = subName,
         avator = avator,

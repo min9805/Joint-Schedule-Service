@@ -116,6 +116,17 @@ data class LoginDto(
         get() = _password!!
 }
 
+data class MemberInfoDtoRequest(
+    @field:NotBlank
+    @JsonProperty("loginId")
+    private val _loginId: String?,
+
+    ) {
+    val loginId: String
+        get() = _loginId!!
+}
+
+
 data class MemberDtoResponse(
     val id: Long,
     val loginId: String,
@@ -124,4 +135,10 @@ data class MemberDtoResponse(
     val gender: String,
     val email: String,
     val roles: List<ROLE>,
+)
+
+data class MemberInfoDtoResponse(
+    val id: Long,
+    val loginId: String,
+    val avator: String,
 )

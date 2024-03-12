@@ -88,4 +88,30 @@ class TeamService(
 
         return "팀에 이벤트가 생성되었습니다.";
     }
+
+    /**
+     * 팀에 멤버 추가
+     */
+    fun addMember(addMemberDtoRequest: AddMemberDtoRequest): String {
+        val member: Member =
+            memberRepository.findByIdOrNull(addMemberDtoRequest.id) ?: throw InvalidInputException(
+                "id",
+                "회원번호(${addMemberDtoRequest.id})가 존재하지 않는 유저입니다."
+            )
+
+        val team: Team =
+            teamRepository.findByIdOrNull(addMemberDtoRequest.groupId)
+                ?: throw InvalidInputException("팀 ID 가 존재하지 않습니다.")
+        
+        memberTeamRepository.save(
+            MemberTeam(
+                groupName = team.name,
+                memberName = member.name,
+                member = member,
+                team = team
+            )
+        )
+
+        return "${team.name} 에 ${member.loginId} 멤버가 추가되었습니다."
+    }
 }
