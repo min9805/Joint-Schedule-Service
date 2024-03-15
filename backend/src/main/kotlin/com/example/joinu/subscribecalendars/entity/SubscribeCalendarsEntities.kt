@@ -2,6 +2,7 @@ package com.example.joinu.subscribecalendars.entity
 
 import com.example.joinu.calendars.entity.Calendars
 import com.example.joinu.common.status.Category
+import com.example.joinu.common.status.Const.DEFAULT_COLOR
 import com.example.joinu.common.status.Gender
 import com.example.joinu.member.entity.Member
 import jakarta.persistence.*
@@ -29,5 +30,6 @@ class SubscribeCalendars(
 
     var alias: String,
 
-    ) {
+    var color: String = DEFAULT_COLOR,
+) {
 }

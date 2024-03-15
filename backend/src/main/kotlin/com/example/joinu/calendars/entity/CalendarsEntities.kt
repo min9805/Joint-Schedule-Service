@@ -1,6 +1,9 @@
 package com.example.joinu.calendars.entity
 
+import com.example.joinu.calendars.dto.CalendarEventsDtoResponse
+import com.example.joinu.calendars.dto.CalendarListDtoResponse
 import com.example.joinu.common.status.Category
+import com.example.joinu.common.status.Const.DEFAULT_COLOR
 import com.example.joinu.member.entity.Member
 import com.example.joinu.team.entity.Team
 import jakarta.persistence.*
@@ -27,9 +30,14 @@ class Calendars(
 
     val author: String,
 
+    val color: String = DEFAULT_COLOR,
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "calendars")
     val events: List<CalendarEvent> = ArrayList(),
 ) {
+
+    fun toCalendarListDtoResponse(): CalendarListDtoResponse =
+        CalendarListDtoResponse(category, name, author)
 
 
 }
@@ -50,7 +58,7 @@ class CalendarEvent(
     var id: Long? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    val calendars: Calendars? = null,
+    var calendars: Calendars? = null,
 
     @Column(nullable = false, length = 100)
     var title: String,
@@ -63,4 +71,8 @@ class CalendarEvent(
 
     @Column
     var end: Date,
-) {}
+) {
+    fun toCalendarEventsDtoResponse(): CalendarEventsDtoResponse =
+        CalendarEventsDtoResponse(title, description, start, end)
+
+}
