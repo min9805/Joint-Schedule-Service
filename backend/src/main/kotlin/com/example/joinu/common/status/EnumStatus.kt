@@ -13,3 +13,10 @@ enum class ResultCode(val msg: String) {
 enum class ROLE {
     MEMBER
 }
+
+enum class Category {
+    SCHOOL,
+    SPORT,
+    STUDY,
+    DAILY
+}
