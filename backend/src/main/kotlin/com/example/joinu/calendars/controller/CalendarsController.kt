@@ -7,11 +7,7 @@ import com.example.joinu.calendars.dto.CreateCalendarDtoRequest
 import com.example.joinu.calendars.service.CalendarsService
 import com.example.joinu.common.dto.BaseResponse
 import com.example.joinu.common.exception.InvalidInputException
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/calendars")
@@ -27,6 +23,15 @@ class CalendarsController(
     fun getCalendars(): BaseResponse<List<CalendarListDtoResponse>> {
         val result = calendarsService.getCalendars()
         return BaseResponse(data = result)
+    }
+
+    /**
+     * Get Calendar Events by Calendar Id
+     */
+    @GetMapping("/events/{calendarId}")
+    fun getCalendarsEventsById(@PathVariable calendarId: Long): BaseResponse<List<CalendarEventsDtoResponse>> {
+        val calendarEvents = calendarsService.getCalendarEventsById(calendarId)
+        return BaseResponse(data = calendarEvents)
     }
 
     /**

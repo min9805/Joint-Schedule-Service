@@ -5,6 +5,7 @@ import com.example.joinu.common.status.Category
 import java.util.Date
 
 data class CalendarListDtoResponse(
+    val calendarId: Long,
     val category: Category,
     val name: String,
     val author: String,

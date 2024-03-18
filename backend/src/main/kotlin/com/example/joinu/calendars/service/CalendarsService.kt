@@ -47,6 +47,21 @@ class CalendarsService(
     }
 
     /**
+     * Get Calendar Events by List of Calendar
+     */
+    fun getCalendarEventsById(calendarId: Long): List<CalendarEventsDtoResponse> {
+
+        val calendar = calendarsRepository.findById(calendarId).orElseThrow {
+            InvalidInputException("존재하지 않는 캘린더 아이디입니다.")
+        }
+        val responseEvents = calendar.events.map {
+            it.toCalendarEventsDtoResponse()
+        }
+
+        return responseEvents
+    }
+
+    /**
      * Create Calendar
      */
     fun createCalendar(createCalendarDtoRequest: CreateCalendarDtoRequest): String {
