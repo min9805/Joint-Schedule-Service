@@ -12,6 +12,3 @@ export const updateEvent = (event) => api.post(`/api/event/update`, event)
 
 //이벤트 삭제
 export const deleteEvent = (eventId) => api.post(`/api/event/delete`, eventId)
-
-//이벤트 조회
-export const getTeams = () => api.get(`/api/team/`)
