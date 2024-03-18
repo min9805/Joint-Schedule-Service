@@ -4,8 +4,6 @@ import com.example.joinu.calendars.dto.CalendarEventsDtoResponse
 import com.example.joinu.calendars.dto.CalendarListDtoResponse
 import com.example.joinu.common.status.Category
 import com.example.joinu.common.status.Const.DEFAULT_COLOR
-import com.example.joinu.member.entity.Member
-import com.example.joinu.team.entity.Team
 import jakarta.persistence.*
 import java.util.*
 
@@ -15,6 +13,7 @@ import java.util.*
  * @property category Category of the calendar (school, sports, study, daily, etc..)
  * @property name The name of calendar
  * @property author The Author name (member login Id) of calendar
+ * @property description Description of Calendar
  * @property events Events belong the calendar
  */
 @Entity
@@ -24,11 +23,13 @@ class Calendars(
     val id: Long? = null,
 
     @Enumerated(EnumType.STRING)
-    val category: Category,
+    val category: Category = Category.DAILY,
 
-    val name: String,
+    val name: String = "",
 
-    val author: String,
+    val author: String = "",
+
+    val description: String = "",
 
     val color: String = DEFAULT_COLOR,
 
@@ -37,7 +38,7 @@ class Calendars(
 ) {
 
     fun toCalendarListDtoResponse(): CalendarListDtoResponse =
-        CalendarListDtoResponse(category, name, author)
+        CalendarListDtoResponse(category, name, author, description)
 
 
 }

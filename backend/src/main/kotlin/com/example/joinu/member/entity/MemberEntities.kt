@@ -11,6 +11,7 @@ import jakarta.persistence.*
 import org.springframework.security.crypto.password.PasswordEncoder
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 @Entity
 @Table(
@@ -22,24 +23,24 @@ class Member(
     var id: Long? = null,
 
     @Column(nullable = false, length = 30, updatable = false)
-    val loginId: String,
+    val loginId: String = "",
 
     @Column(nullable = false, length = 100)
-    var password: String,
+    var password: String = "",
 
     @Column(nullable = false, length = 10)
-    var name: String,
+    var name: String = "",
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    val birthDate: LocalDate,
+    val birthDate: LocalDate = LocalDate.now(),
 
     @Column(nullable = false, length = 5)
     @Enumerated(EnumType.STRING)
-    val gender: Gender,
+    val gender: Gender = Gender.MAN,
 
     @Column(nullable = false, length = 30)
-    var email: String,
+    var email: String = "",
 
     var avator: String = "/img/default_avator.png",
 ) {

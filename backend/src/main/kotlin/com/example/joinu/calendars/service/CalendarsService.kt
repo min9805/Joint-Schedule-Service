@@ -7,11 +7,12 @@ import com.example.joinu.calendars.dto.CreateCalendarDtoRequest
 import com.example.joinu.calendars.entity.Calendars
 import com.example.joinu.calendars.repository.CalendarEventRepository
 import com.example.joinu.calendars.repository.CalendarsRepository
+import com.example.joinu.common.dto.CustomUser
 import com.example.joinu.common.exception.InvalidInputException
 import com.example.joinu.common.status.Category
 import com.example.joinu.common.status.Const.DEFAULT_COLOR
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
-import java.util.ArrayList
 
 @Service
 class CalendarsService(
@@ -28,7 +29,7 @@ class CalendarsService(
     }
 
     /**
-     * Get Calender Events by List of Calendar
+     * Get Calendar Events by List of Calendar
      */
     fun getCalendarEvents(calendarEventsDtoQRequest: CalendarEventsDtoQRequest): MutableList<CalendarEventsDtoResponse> {
         val result: MutableList<CalendarEventsDtoResponse> = mutableListOf()
@@ -49,10 +50,13 @@ class CalendarsService(
      * Create Calendar
      */
     fun createCalendar(createCalendarDtoRequest: CreateCalendarDtoRequest): String {
+        val userName = (SecurityContextHolder.getContext().authentication.principal as CustomUser).username
+
         val calendar = Calendars(
             category = Category.valueOf(createCalendarDtoRequest.category),
             name = createCalendarDtoRequest.name,
-            author = createCalendarDtoRequest.author,
+            author = userName,
+            description = createCalendarDtoRequest.description,
             color = if (createCalendarDtoRequest.color.isNotBlank()) createCalendarDtoRequest.color else DEFAULT_COLOR
         )
         val savedCalendar = calendarsRepository.save(calendar)
@@ -63,7 +67,7 @@ class CalendarsService(
             calendarsEventRepository.save(CalendarEvent)
         }
 
-        return "${createCalendarDtoRequest.name} 일정이 생성되었습니다."
+        return "${userName} 일정이 생성되었습니다."
     }
-    
+
 }

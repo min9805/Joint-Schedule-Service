@@ -4,4 +4,6 @@ import com.example.joinu.subscribecalendars.entity.SubscribeCalendars
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface SubscribeCalendarsRepository : JpaRepository<SubscribeCalendars, Long> {
+    fun deleteByMemberIdAndCalendarsId(memberId: Long, calendarsId: Long): Long
+
 }

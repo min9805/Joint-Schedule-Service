@@ -7,9 +7,13 @@ import java.util.Date
 data class CalendarListDtoResponse(
     val category: Category,
     val name: String,
-    val author: String
+    val author: String,
+    val description: String
 )
 
+/**
+ * List of calendar ID
+ */
 data class CalendarEventsDtoQRequest(
     val calendar_id: List<Long>
 )
@@ -23,9 +27,9 @@ data class CalendarEventsDtoResponse(
 )
 
 data class CreateCalendarDtoRequest(
-    val name: String,
     val category: String,
-    val author: String,
+    val name: String,
+    val description: String,
     val color: String,
     val events: List<CreateCalendarEventsDto>
 )
