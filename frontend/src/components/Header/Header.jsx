@@ -32,6 +32,7 @@ const Header = () => {
                         :
                         /* 로그인 시 */
                         <ul>
+                            <li><Link to="/calendar">구독</Link></li>
                             <li><Link to="/group">그룹</Link></li>
                             <li><Link to="/user">마이페이지</Link></li>
                             <li><Link to="/admin">관리자</Link></li>
