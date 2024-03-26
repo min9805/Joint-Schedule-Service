@@ -8,7 +8,9 @@ import com.example.joinu.subscribecalendars.dto.SubscribeRequestDto
 import com.example.joinu.subscribecalendars.dto.UnbscribeRequestDto
 import com.example.joinu.subscribecalendars.entity.SubscribeCalendars
 import com.example.joinu.subscribecalendars.service.SubscribeCalendarsServices
+import com.fasterxml.jackson.databind.ser.Serializers.Base
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -42,5 +44,16 @@ class SubscribeCalendarsController(
         val result = subscribeCalendarsServices.unsubscribeCalendar(unbscribeRequestDto)
 
         return BaseResponse(message = result)
+    }
+
+    /**
+     * Get List of Subscribed calendar
+     *
+     *  @return Subscribe Calendar List
+     */
+    @GetMapping()
+    fun getSubscribeList(): BaseResponse<List<Long?>> {
+        val result = subscribeCalendarsServices.getSubscribeList()
+        return BaseResponse(data = result)
     }
 }

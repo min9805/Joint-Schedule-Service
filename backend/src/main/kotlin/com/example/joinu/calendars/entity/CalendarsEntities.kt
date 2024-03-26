@@ -38,7 +38,7 @@ class Calendars(
 ) {
 
     fun toCalendarListDtoResponse(): CalendarListDtoResponse =
-        CalendarListDtoResponse(id!!, category, name, author, description)
+        CalendarListDtoResponse(id!!, category, name, author, description, color)
 
 
 }

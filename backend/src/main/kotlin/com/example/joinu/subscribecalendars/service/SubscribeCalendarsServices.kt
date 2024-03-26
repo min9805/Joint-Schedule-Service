@@ -51,4 +51,16 @@ class SubscribeCalendarsServices(
 
         return "일정 구독이 취소되었습니다."
     }
+
+    /**
+     * Get List of Subscribed calendar
+     *
+     *  @return Subscribe Calendar List
+     */
+    fun getSubscribeList(): List<Long?> {
+        val userId = (SecurityContextHolder.getContext().authentication.principal as CustomUser).userId
+
+        val result = subscribeCalendarsRepository.findByMemberId(userId).map { it.calendars!!.id }
+        return result
+    }
 }

@@ -9,7 +9,8 @@ data class CalendarListDtoResponse(
     val category: Category,
     val name: String,
     val author: String,
-    val description: String
+    val description: String,
+    val color: String
 )
 
 /**
