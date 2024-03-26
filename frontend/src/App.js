@@ -9,6 +9,7 @@ import Group from './pages/Group';
 import GroupDetail from './pages/GroupDetail';
 import Calendar from './pages/Calendar';
 import CalendarDetail from './pages/CalendarDetail';
+import CreateCalendar from './pages/CreateCalendar';
 import LoginContextProvider from './contexts/LoginContextProvider';
 import Admin from './pages/Admin';
 
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/group/:groupId" element={<GroupDetail />} />
           <Route path="/calendar" element={<Calendar />}></Route>
           <Route path="/calendar/:calendarId" element={<CalendarDetail />} />
+          <Route path="/calendar/create" element={<CreateCalendar />}></Route>
 
         </Routes>
       </LoginContextProvider>

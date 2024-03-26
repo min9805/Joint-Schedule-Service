@@ -4,6 +4,7 @@ import BasicScheduler from '../components/Scheduler/BasicScheduler'
 import DemoScheduler from '../components/Scheduler/DemoScheduler'
 import { EVENTS } from '../assets/defaultEvents.ts';
 import * as eventsApi from '../apis/events';
+import * as calendarApi from '../apis/calendar';
 
 const LoginContextConsumer = () => {
   const { isLogin, userInfo } = useContext(LoginContext)
@@ -15,6 +16,7 @@ const LoginContextConsumer = () => {
         // 로그인 상태인 경우에만 이벤트를 가져옴
         if (isLogin) {
           const response = await eventsApi.getEvents()
+          const subscribe = await calendarApi.subscribeList()
           const { data, status, headers } = response;
 
           const convertedData = data.data.map(event => ({
@@ -22,10 +24,24 @@ const LoginContextConsumer = () => {
             start: new Date(event.start),
             end: new Date(event.end)
           }));
+          console.log(subscribe.data.data);
 
-          console.log("convertedData", convertedData);
+          if (subscribe.data.data) {
+            const subscribeEvents = await calendarApi.getCalendarEvents({ "calendar_id": subscribe.data.data })
 
-          setEvents(convertedData);
+            const convertedSubData = subscribeEvents.data.data.map(event => ({
+              ...event,
+              start: new Date(event.start),
+              end: new Date(event.end)
+            }));
+
+            const mergeArray = convertedData.concat(convertedSubData)
+            setEvents(mergeArray)
+
+          } else {
+            setEvents(convertedData);
+          }
+
         }
       } catch (error) {
         console.error('Error fetching events:', error);

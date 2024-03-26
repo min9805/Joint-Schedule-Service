@@ -28,12 +28,12 @@ const Calendar = () => {
 
 
   const handleCalendarClick = (item) => {
-    navigate("/calendar/" + item.calenderId, { state: { data: item } })
+    navigate("/calendar/" + item.calendarId, { state: { data: item } })
     // 박스를 클릭할 때 해당 그룹의 groupId를 URL 쿼리로 전달합니다.
   };
 
   const createCalendar = () => {
-
+    navigate("/calendar/create")
   }
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const Calendar = () => {
         <div className="group-container">
           {calendars.map((item, index) => (
             <div key={index} className="group-box" onClick={() => handleCalendarClick(item)}>
-              {/* 그룹 정보 표시 */}
+              {/* 캘린더 정보 표시 */}
               <h3>{item.name}</h3>
               <br />
               <h5>{item.description}</h5>

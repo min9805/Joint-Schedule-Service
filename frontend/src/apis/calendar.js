@@ -13,6 +13,9 @@ export const getCalendarEvents = (data) => api.post(`/api/calendars/events`, dat
 //공유 일정 이벤트 조회 by ID
 export const getCalendarEventsById = (calendarId) => api.get(`/api/calendars/events/${calendarId}`)
 
+//구독 일정 조회
+export const subscribeList = () => api.get('/api/subscribe')
+
 //공유 일정 구독
 export const subscribeCalendar = (data) => api.post(`/api/subscribe/subscribe`, data)
 

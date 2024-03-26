@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div className="container">
+      <div style={{ "margin": "auto", "width": "800px" }}>
         <LoginContextConsumer />
       </div>
     </>
