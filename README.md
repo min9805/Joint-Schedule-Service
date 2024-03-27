@@ -28,15 +28,17 @@ This project comprises both a backend developed using Spring Boot and a frontend
 
 ![image](https://github.com/min9805/min9805.github.io/assets/56664567/225d6013-d36d-41ed-9b42-24387fdd6d29)
 
-- User authentication and authorization
+### User authentication and authorization
 <img src="https://github.com/min9805/min9805.github.io/assets/56664567/a3985454-4424-4f69-8c1d-407323175fb2" width="70%" height="70%">
 <img src="https://github.com/min9805/min9805.github.io/assets/56664567/11d1e1b7-3875-4158-ac0b-04a7d9a5dca4" width="40%" height="40%">
 
-- Event creation, modification, and deletion
+### Event creation, modification, and deletion
 <img src="https://github.com/min9805/min9805.github.io/assets/56664567/b843eff0-f6a3-4b76-99dc-a436e1fc5ed9" width="50%" height="50%">
-| <img src="./docs/img/Event_create.gif"> | <img src="./docs/img/Event_dragDrop.gif"> | <img src="./docs/img/Event_edit.gif"> | <img src="./docs/img/Event_delete.gif"> |
-| :----------------------------------: | :------------------------------------: | :---------------------------------------: | :----: |
-|     Create      |      Drag & Drop      |         Edit           | Delete |
+
+| ![Create](./docs/img/Event_create.gif) | ![Drag & Drop](./docs/img/Event_dragDrop.gif) | ![Edit](./docs/img/Event_edit.gif) | ![Delete](./docs/img/Event_delete.gif) |
+| :------------------------------------: | :------------------------------------------: | :-------------------------------: | :-----------------------------------: |
+|               Create                   |                 Drag & Drop                   |               Edit                |                Delete                 |
+
 
 - Group Scheduler Service
 <img src="https://github.com/min9805/min9805.github.io/assets/56664567/f21bb3b8-4ccc-4eae-82f2-261f01e3353c" width="50%" height="50%">
