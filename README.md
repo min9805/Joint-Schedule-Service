@@ -35,9 +35,14 @@ This project comprises both a backend developed using Spring Boot and a frontend
 ### Event creation, modification, and deletion
 <img src="https://github.com/min9805/min9805.github.io/assets/56664567/b843eff0-f6a3-4b76-99dc-a436e1fc5ed9" width="50%" height="50%">
 
-| ![Create](./docs/img/Event_create.gif) | ![Drag & Drop](./docs/img/Event_dragDrop.gif) | ![Edit](./docs/img/Event_edit.gif) | ![Delete](./docs/img/Event_delete.gif) |
-| :------------------------------------: | :------------------------------------------: | :-------------------------------: | :-----------------------------------: |
-|               Create                   |                 Drag & Drop                   |               Edit                |                Delete                 |
+| ![Create](./docs/img/Event_create.gif) | ![Drag & Drop](./docs/img/Event_dragDrop.gif) |
+| :------------------------------------: | :------------------------------------------: |
+|               Create                   |                 Drag & Drop                   |
+
+| ![Edit](./docs/img/Event_edit.gif) | ![Delete](./docs/img/Event_delete.gif) |
+| :-------------------------------: | :-----------------------------------: |
+|               Edit                |                Delete                 |
+
 
 
 - Group Scheduler Service
