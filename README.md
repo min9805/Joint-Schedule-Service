@@ -34,6 +34,9 @@ This project comprises both a backend developed using Spring Boot and a frontend
 
 - Event creation, modification, and deletion
 <img src="https://github.com/min9805/min9805.github.io/assets/56664567/b843eff0-f6a3-4b76-99dc-a436e1fc5ed9" width="50%" height="50%">
+| <img src="./docs/img/Event_create.gif"> | <img src="./docs/img/Event_dragDrop.gif"> | <img src="./docs/img/Event_edit.gif"> | <img src="./docs/img/Event_delete.gif"> |
+| :----------------------------------: | :------------------------------------: | :---------------------------------------: | :----: |
+|     Create      |      Drag & Drop      |         Edit           | Delete |
 
 - Group Scheduler Service
 <img src="https://github.com/min9805/min9805.github.io/assets/56664567/f21bb3b8-4ccc-4eae-82f2-261f01e3353c" width="50%" height="50%">
@@ -42,9 +45,12 @@ This project comprises both a backend developed using Spring Boot and a frontend
 <img src="https://github.com/min9805/min9805.github.io/assets/56664567/431b43a3-9bbc-4f95-91f1-520837975ae8" width="30%" height="30%">
 <img src="https://github.com/min9805/min9805.github.io/assets/56664567/011bb999-4a89-4dc3-9263-665b8b6ebc96" width="30%" height="30%">
 
+<img src="./docs/img/Group_Member.gif">
+
 - Subscribe Calendars
 ![sbsc](https://github.com/min9805/min9805.github.io/assets/56664567/0588426b-18f7-4a0c-9ac3-280cafd1b966)
 
+<img src="./docs/img/Subscribe.gif">
 
 
 
